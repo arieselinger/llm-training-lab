@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo This script must be sourced to work properly.
+    exit 1
+fi
+
+echo Setting up PATH
+export PYTHONPATH=$(pwd)
+export POETRY_HOME=~/.local
+export PATH=$PATH:$POETRY_HOME/bin
+
+echo Checking Poetry
+if command -v poetry >/dev/null 2>&1; then
+    echo Poetry is already installed
+else
+    echo Installing Poetry
+    curl -sSL https://install.python-poetry.org | python3 - || return 1
+fi
+
+echo Installing python dependencies
+poetry install --no-root || return 1
+
+echo Sourcing virtual environment
+source .venv/bin/activate
+
+echo Done!

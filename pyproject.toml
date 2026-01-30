@@ -1,0 +1,52 @@
+[project]
+name = "llm-training-lab"
+version = "0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+
+[tool.poetry]
+packages = [{ include = "llm_training_lab" }]
+
+[tool.poetry.dependencies]
+
+
+[tool.pyright]
+typeCheckingMode = "strict"
+reportMissingTypeStubs = "warning"
+include = ["."]
+exclude = ["**/__pycache__", ".venv"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+fix = true
+line-length = 100
+indent-width = 2
+target-version = "py312"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "RUF"]
+ignore = ["N806"]                    # Allow single-letter uppercase variable names 
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.isort]
+combine-as-imports = false
+
+[dependency-groups]
+dev = [
+  "pyright (>=1.1.406,<2.0.0)",
+  "ruff (>=0.13.3,<0.14.0)",
+  "pytest (>=9.0.1,<10.0.0)",
+]
